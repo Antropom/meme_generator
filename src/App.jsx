@@ -7,6 +7,8 @@ import Pics from './components/Pics';
 function App() {
 
   const [basePics, setBasePics] = useState(null);
+  const [topSentence, setTopSentence] = useState("");
+  const [bottomSentence, setBottomSentence] = useState("");
 
   useEffect(() => {
     axios
@@ -15,7 +17,7 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <Sentence />
+      <Sentence topSentence={topSentence} setTopSentence={setTopSentence} bottomSentence={bottomSentence} setBottomSentence={setBottomSentence} />
       <div className="base-pics-app">
         {basePics &&
           basePics.map((pic) => {
