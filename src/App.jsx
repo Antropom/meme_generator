@@ -14,10 +14,12 @@ function App() {
 
   return (
     <div className="App">
-      {basePics &&
-        basePics.map((pic) => {
-          return <Pics name={pic.name} url={pic.url} />;
-        })}
+      <div className="base-pics-app">
+        {basePics &&
+          basePics.map((pic) => {
+            return <Pics name={pic.name} url={pic.url} />;
+          })}
+      </div>
     </div>
   );
 }
