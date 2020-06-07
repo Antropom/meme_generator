@@ -1,21 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import Sentence from './components/Sentence';
 import './App.css';
+import 'noty/lib/noty.css';
 import axios from 'axios';
+import Noty from 'noty';
 import Pics from './components/Pics';
 import Result from './components/Result';
+import List from './components/List';
 
 function App() {
-  const [basePics, setBasePics] = useState(null);
+  const [basePics, setBasePics] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
   const [topSentence, setTopSentence] = useState('');
   const [bottomSentence, setBottomSentence] = useState('');
+  const [listMeme, setListMeme] = useState([]);
 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/pics`)
       .then((res) => setBasePics(res.data));
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/memes`)
+      .then((res) => setListMeme(res.data));
   }, []);
+
+  const handlesubmit = () => {
+    const picture = basePics.find((pic) => pic.url === selectedImg);
+    const body = {
+      base_pics_id: picture.id,
+      txt1: topSentence,
+      txt2: bottomSentence,
+    };
+    axios.post(`${process.env.REACT_APP_API_URL}/api/memes`, body).then((res) =>
+      new Noty({
+        text: 'post effectué',
+      }).show()
+    );
+  };
 
   return (
     <div className="App">
@@ -43,6 +64,8 @@ function App() {
             );
           })}
       </div>
+      <button onClick={handlesubmit}>Envoyer</button>
+      <List listMeme={listMeme} basePics={basePics} />
     </div>
   );
 }
