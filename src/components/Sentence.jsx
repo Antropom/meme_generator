@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './component.css'
 
-function Sentence() {
-
-    const [topSentence, setTopSentence] = useState("");
-    const [bottomSentence, setBottomSentence] = useState("");
+function Sentence({ topSentence, setTopSentence, bottomSentence, setBottomSentence }) {
 
     return (
         <div className="block-component">
