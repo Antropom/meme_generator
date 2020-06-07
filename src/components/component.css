@@ -1,0 +1,16 @@
+.block-component {
+    width: 20vw;
+    margin: 0 auto;
+}
+.small-title {
+    margin: 10px;
+}
+.flex {
+    display: flex;
+}
+.column {
+    flex-direction: column;
+}
+.input {
+    margin: 20px auto;
+}
