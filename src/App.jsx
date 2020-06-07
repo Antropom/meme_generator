@@ -3,6 +3,7 @@ import Sentence from './components/Sentence';
 import './App.css';
 import axios from 'axios';
 import Pics from './components/Pics';
+import Result from './components/Result';
 
 function App() {
   const [basePics, setBasePics] = useState(null);
@@ -18,6 +19,11 @@ function App() {
 
   return (
     <div className="App">
+      <Result
+        topSentence={topSentence}
+        bottomSentence={bottomSentence}
+        selectedImg={selectedImg}
+      />
       <Sentence
         topSentence={topSentence}
         setTopSentence={setTopSentence}
