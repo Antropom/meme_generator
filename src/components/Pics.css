@@ -1,3 +1,7 @@
 .base-pics-wrapper img {
   max-height: 15vh;
 }
+
+.selected-img {
+  opacity: 0.5;
+}
