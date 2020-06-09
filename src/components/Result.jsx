@@ -23,14 +23,16 @@ const Result = (props) => {
     ctx.drawImage(image, 0, 0, canvasObj.width, HEIGHT);
     ctx.fillStyle = 'black';
     const top = Math.floor(HEIGHT * 0.1);
-    const bottom = Math.floor(HEIGHT * 0.8);
+    const bottom = Math.floor(HEIGHT * 0.9);
     ctx.font = `24pt impact`;
-    ctx.fillText(topSentence, 11, top + 1);
-    ctx.fillText(bottomSentence, 11, bottom + 1);
+    ctx.textAlign = 'center';
+    ctx.fillText(topSentence, canvasObj.width / 2, top + 1);
+    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom + 1);
     ctx.font = `24pt impact`;
     ctx.fillStyle = 'white';
-    ctx.fillText(topSentence, 10, top);
-    ctx.fillText(bottomSentence, 10, bottom);
+    ctx.textAlign = 'center';
+    ctx.fillText(topSentence, canvasObj.width / 2, top);
+    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom);
   }, [topSentence, bottomSentence, image]);
 
   return <canvas ref={canvasRef} />;
