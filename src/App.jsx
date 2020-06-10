@@ -35,7 +35,7 @@ function App() {
       .post(`${process.env.REACT_APP_API_URL}/api/memes`, body)
       .then((res) =>
         new Noty({
-          text: 'post effectué',
+          text: 'Post Effectué',
         }).show()
       )
       .then(() => {
