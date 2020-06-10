@@ -34,9 +34,8 @@ const Result = (props) => {
     ctx.fillText(bottomSentence, 10, bottom);
   }, [topSentence, bottomSentence, image]);
 
-  return (
-      <canvas ref={canvasRef} />
-    );
+  return <canvas ref={canvasRef} className="canvas" />
+    
 };
 
 export default Result;

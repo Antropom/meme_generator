@@ -44,32 +44,41 @@ function App() {
         <h1>Geoffroy meme Generator</h1>
         <p className="legend"><em>Pensez à ne pas baisser la barre</em></p>
       </div>
-        <Result
+      <div className="interactive-panel">
+        <div className="result">
+          { selectedImg !==null ? 
+          <Result
           topSentence={topSentence}
           bottomSentence={bottomSentence}
           selectedImg={selectedImg}
-        />
+          /> : 
+          <h3>1) Choisissez une image</h3>
+        }
+        </div>
         <Sentence
           topSentence={topSentence}
           setTopSentence={setTopSentence}
           bottomSentence={bottomSentence}
           setBottomSentence={setBottomSentence}
           handlesubmit={handlesubmit}
-        />
+          />
         <div className="base-pics-app">
           {basePics &&
             basePics.map((pic) => {
               return (
                 <Pics
-                  name={pic.name}
-                  url={pic.url}
-                  setSelectedImg={setSelectedImg}
-                  selectedImg={selectedImg}
+                name={pic.name}
+                url={pic.url}
+                setSelectedImg={setSelectedImg}
+                selectedImg={selectedImg}
                 />
-              );
-            })}
+                );
+              })}
         </div>
-      <List listMeme={listMeme} basePics={basePics} />
+      </div>
+      <div className="list">
+        <List listMeme={listMeme} basePics={basePics} />
+      </div>
     </div>
   );
 }

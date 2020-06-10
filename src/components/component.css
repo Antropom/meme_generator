@@ -1,29 +1,25 @@
 .block-component {
   justify-content: center;
-  height: 400px;
 }
-.small-title {
-  margin: 10px;
+.size {
+  height: 30vh;
+  width: 30vw;
+}
+.field :last-child {
+  align-self: center;
 }
 .flex {
-  display: flex;  
-}
-.column {
+  display: flex; 
   flex-direction: column;
+  align-items: space-around;
+  justify-content: space-around; 
 }
 .row {
     flex-direction: row;
     justify-content: space-around;
 }
-.input {
-  margin: 20px auto;
+
+.canvas {
+  margin: 10px;
 }
-.flex button {
-    margin: 5px;
-}
-.result {
-  border: 1px solid black;
-  background-color: rgba(0, 0, 0, 0.295);
-  height: 400px;
-  width: 400px;
-}
+
