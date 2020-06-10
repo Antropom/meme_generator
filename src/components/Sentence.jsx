@@ -1,5 +1,5 @@
-import React from "react";
-import "./component.css";
+import React from 'react';
+import './component.css';
 
 function Sentence({
   topSentence,
@@ -20,7 +20,7 @@ function Sentence({
         name=""
         id=""
         value={topSentence}
-        onChange={(e) => setTopSentence(e.target.value)}
+        onChange={(e) => setTopSentence(e.target.value.toUpperCase())}
       />
       <label className="small-title" htmlFor="">
         phrase du bas
@@ -31,7 +31,7 @@ function Sentence({
         name=""
         id=""
         value={bottomSentence}
-        onChange={(e) => setBottomSentence(e.target.value)}
+        onChange={(e) => setBottomSentence(e.target.value.toUpperCase())}
       />
       <div className="flex row">
         <button className="cursor-pointer" onClick={handlesubmit}>

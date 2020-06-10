@@ -31,29 +31,41 @@ function App() {
       txt1: topSentence,
       txt2: bottomSentence,
     };
-    axios.post(`${process.env.REACT_APP_API_URL}/api/memes`, body).then((res) =>
-      new Noty({
-        text: 'post effectué',
-      }).show()
-    );
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/memes`, body)
+      .then((res) =>
+        new Noty({
+          text: 'Post Effectué',
+        }).show()
+      )
+      .then(() => {
+        axios
+          .get(`${process.env.REACT_APP_API_URL}/api/memes`)
+          .then((res) => setListMeme(res.data));
+      });
+    setTopSentence('');
+    setBottomSentence('');
   };
 
   return (
     <div className="App">
       <div className="header">
         <h1>Geoffroy meme Generator</h1>
-        <p className="legend"><em>Pensez à ne pas baisser la barre</em></p>
+        <p className="legend">
+          <em>Pensez à ne pas baisser la barre</em>
+        </p>
       </div>
       <div className="interactive-panel">
         <div className="result">
-          { selectedImg !==null ? 
-          <Result
-          topSentence={topSentence}
-          bottomSentence={bottomSentence}
-          selectedImg={selectedImg}
-          /> : 
-          <h3>1) Choisissez une image</h3>
-        }
+          {selectedImg !== null ? (
+            <Result
+              topSentence={topSentence}
+              bottomSentence={bottomSentence}
+              selectedImg={selectedImg}
+            />
+          ) : (
+            <h3>1) Choisissez une image</h3>
+          )}
         </div>
         <Sentence
           topSentence={topSentence}
@@ -61,23 +73,32 @@ function App() {
           bottomSentence={bottomSentence}
           setBottomSentence={setBottomSentence}
           handlesubmit={handlesubmit}
-          />
+        />
         <div className="base-pics-app">
           {basePics &&
             basePics.map((pic) => {
               return (
                 <Pics
-                name={pic.name}
-                url={pic.url}
-                setSelectedImg={setSelectedImg}
-                selectedImg={selectedImg}
+                  name={pic.name}
+                  url={pic.url}
+                  setSelectedImg={setSelectedImg}
+                  selectedImg={selectedImg}
                 />
-                );
-              })}
+              );
+            })}
         </div>
       </div>
       <div className="list">
-        <List listMeme={listMeme} basePics={basePics} />
+        {listMeme.map((item) => {
+          const picture = basePics.find((pic) => item.base_pics_id === pic.id);
+          return (
+            <Result
+              topSentence={item.txt1}
+              bottomSentence={item.txt2}
+              selectedImg={picture && picture.url}
+            />
+          );
+        })}
       </div>
     </div>
   );
