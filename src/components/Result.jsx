@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './component.css'
 const HEIGHT = 400;
 
 const Result = (props) => {
@@ -33,7 +34,9 @@ const Result = (props) => {
     ctx.fillText(bottomSentence, 10, bottom);
   }, [topSentence, bottomSentence, image]);
 
-  return <canvas ref={canvasRef} />;
+  return (
+      <canvas ref={canvasRef} />
+    );
 };
 
 export default Result;

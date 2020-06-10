@@ -40,31 +40,35 @@ function App() {
 
   return (
     <div className="App">
-      <Result
-        topSentence={topSentence}
-        bottomSentence={bottomSentence}
-        selectedImg={selectedImg}
-      />
-      <Sentence
-        topSentence={topSentence}
-        setTopSentence={setTopSentence}
-        bottomSentence={bottomSentence}
-        setBottomSentence={setBottomSentence}
-      />
-      <div className="base-pics-app">
-        {basePics &&
-          basePics.map((pic) => {
-            return (
-              <Pics
-                name={pic.name}
-                url={pic.url}
-                setSelectedImg={setSelectedImg}
-                selectedImg={selectedImg}
-              />
-            );
-          })}
+      <div className="header">
+        <h1>Geoffroy meme Generator</h1>
+        <p className="legend"><em>Pensez à ne pas baisser la barre</em></p>
       </div>
-      <button onClick={handlesubmit}>Envoyer</button>
+        <Result
+          topSentence={topSentence}
+          bottomSentence={bottomSentence}
+          selectedImg={selectedImg}
+        />
+        <Sentence
+          topSentence={topSentence}
+          setTopSentence={setTopSentence}
+          bottomSentence={bottomSentence}
+          setBottomSentence={setBottomSentence}
+          handlesubmit={handlesubmit}
+        />
+        <div className="base-pics-app">
+          {basePics &&
+            basePics.map((pic) => {
+              return (
+                <Pics
+                  name={pic.name}
+                  url={pic.url}
+                  setSelectedImg={setSelectedImg}
+                  selectedImg={selectedImg}
+                />
+              );
+            })}
+        </div>
       <List listMeme={listMeme} basePics={basePics} />
     </div>
   );
