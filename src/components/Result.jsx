@@ -14,7 +14,6 @@ const Result = (props) => {
   }, [selectedImg]);
 
   useEffect(() => {
-    console.log(image, topSentence, bottomSentence);
     if (!image) return;
     const canvasObj = canvasRef.current;
     const ctx = canvasObj.getContext('2d');
@@ -23,25 +22,18 @@ const Result = (props) => {
     canvasObj.width = image.width / ratio;
     ctx.drawImage(image, 0, 0, canvasObj.width, HEIGHT);
     ctx.fillStyle = 'black';
+    ctx.font = `24pt impact`;
+    ctx.textAlign = 'center';
     const top = Math.floor(HEIGHT * 0.1);
     const bottom = Math.floor(HEIGHT * 0.95);
-    ctx.font = `24pt impact`;
-    ctx.textAlign = 'center';
     ctx.fillText(topSentence, canvasObj.width / 2, top + 1);
     ctx.fillText(bottomSentence, canvasObj.width / 2, bottom + 1);
-    ctx.font = `24pt impact`;
-    ctx.textAlign = 'center';
     ctx.fillText(topSentence, canvasObj.width / 2, top - 1);
     ctx.fillText(bottomSentence, canvasObj.width / 2, bottom - 1);
-    ctx.font = `24pt impact`;
-    ctx.textAlign = 'center';
     ctx.fillText(topSentence, canvasObj.width / 2 + 1, top);
     ctx.fillText(bottomSentence, canvasObj.width / 2 + 1, bottom);
-    ctx.font = `24pt impact`;
-    ctx.textAlign = 'center';
     ctx.fillText(topSentence, canvasObj.width / 2 - 1, top + 1);
     ctx.fillText(bottomSentence, canvasObj.width / 2 - 1, bottom);
-    ctx.font = `24pt impact`;
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
     ctx.fillText(topSentence, canvasObj.width / 2, top);

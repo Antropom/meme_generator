@@ -89,16 +89,18 @@ function App() {
         </div>
       </div>
       <div className="list">
-        {listMeme.map((item) => {
+        {listMeme.reduce((a, b, i) => {
+          const item = listMeme[listMeme.length - i - 1];
           const picture = basePics.find((pic) => item.base_pics_id === pic.id);
-          return (
+          a.push(
             <Result
               topSentence={item.txt1}
               bottomSentence={item.txt2}
               selectedImg={picture && picture.url}
             />
           );
-        })}
+          return a;
+        }, [])}
       </div>
     </div>
   );
