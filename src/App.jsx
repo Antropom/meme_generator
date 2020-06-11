@@ -64,9 +64,9 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <h1>Geoffroy meme Generator</h1>
+        <h1 className="cursor-default">Geoffroy meme Generator</h1>
         <p className="legend">
-          <em>Pensez à ne pas baisser la barre</em>
+          <em className="cursor-default">Pensez à ne pas baisser la barre</em>
         </p>
       </div>
       <div className="interactive-panel">
@@ -78,7 +78,7 @@ function App() {
               selectedImg={selectedImg}
             />
           ) : (
-            <h3>1) Choisissez une image</h3>
+            <h3 className="cursor-default">1) Choisissez une image</h3>
           )}
         </div>
         <div className="flex-column-reverse">
