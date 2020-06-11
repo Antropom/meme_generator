@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sentence from './components/Sentence';
 import './App.css';
 import 'noty/lib/noty.css';
+import 'noty/lib/themes/metroui.css'
 import axios from 'axios';
 import Noty from 'noty';
 import Pics from './components/Pics';
@@ -44,7 +45,11 @@ function App() {
       .post(`${process.env.REACT_APP_API_URL}/api/memes`, body)
       .then((res) =>
         new Noty({
-          text: 'Post Effectué',
+          type: 'success',
+          theme: "metroui",
+          timeout: "1000",  
+          progressBar: false, 
+          text: 'Meme ajouté, merci de ta contribution',
         }).show()
       )
       .then(() => {
@@ -55,6 +60,15 @@ function App() {
     setTopSentence('');
     setBottomSentence('');
   };
+  const missField = () => {
+    new Noty ({
+      type: 'error',
+      theme: "metroui",
+      timeout: "1000",
+      progressBar: false,
+      text: 'Ajoute au moins une photo et une phrase de ton choix',
+    }).show()
+  }
 
   return (
     <div className="App">
@@ -83,6 +97,8 @@ function App() {
           bottomSentence={bottomSentence}
           setBottomSentence={setBottomSentence}
           handlesubmit={handlesubmit}
+          selectedImg={selectedImg}
+          missField={missField}
         />
         <div className="base-pics-app">
           {basePics &&
