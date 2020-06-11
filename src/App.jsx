@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sentence from './components/Sentence';
 import './App.css';
 import 'noty/lib/noty.css';
+import 'noty/lib/themes/metroui.css'
 import axios from 'axios';
 import Noty from 'noty';
 import Pics from './components/Pics';
@@ -31,41 +32,92 @@ function App() {
       txt1: topSentence,
       txt2: bottomSentence,
     };
-    axios.post(`${process.env.REACT_APP_API_URL}/api/memes`, body).then((res) =>
-      new Noty({
-        text: 'post effectué',
-      }).show()
-    );
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/memes`, body)
+      .then((res) =>
+        new Noty({
+          type: 'success',
+          theme: "metroui",
+          timeout: "1000",  
+          progressBar: false, 
+          text: 'Meme ajouté, merci de ta contribution',
+        }).show()
+      )
+      .then(() => {
+        axios
+          .get(`${process.env.REACT_APP_API_URL}/api/memes`)
+          .then((res) => setListMeme(res.data));
+      });
+    setTopSentence('');
+    setBottomSentence('');
   };
+  const missField = () => {
+    new Noty ({
+      type: 'error',
+      theme: "metroui",
+      timeout: "1000",
+      progressBar: false,
+      text: 'Ajoute au moins une photo et une phrase de ton choix',
+    }).show()
+  }
 
   return (
     <div className="App">
-      <Result
-        topSentence={topSentence}
-        bottomSentence={bottomSentence}
-        selectedImg={selectedImg}
-      />
-      <Sentence
-        topSentence={topSentence}
-        setTopSentence={setTopSentence}
-        bottomSentence={bottomSentence}
-        setBottomSentence={setBottomSentence}
-      />
-      <div className="base-pics-app">
-        {basePics &&
-          basePics.map((pic) => {
-            return (
-              <Pics
-                name={pic.name}
-                url={pic.url}
-                setSelectedImg={setSelectedImg}
-                selectedImg={selectedImg}
-              />
-            );
-          })}
+      <div className="header">
+        <h1>Geoffroy meme Generator</h1>
+        <p className="legend">
+          <em>Pensez à ne pas baisser la barre</em>
+        </p>
       </div>
-      <button onClick={handlesubmit}>Envoyer</button>
-      <List listMeme={listMeme} basePics={basePics} />
+      <div className="interactive-panel">
+        <div className="result">
+          {selectedImg !== null ? (
+            <Result
+              topSentence={topSentence}
+              bottomSentence={bottomSentence}
+              selectedImg={selectedImg}
+            />
+          ) : (
+            <h3>1) Choisissez une image</h3>
+          )}
+        </div>
+        <Sentence
+          topSentence={topSentence}
+          setTopSentence={setTopSentence}
+          bottomSentence={bottomSentence}
+          setBottomSentence={setBottomSentence}
+          handlesubmit={handlesubmit}
+          selectedImg={selectedImg}
+          missField={missField}
+        />
+        <div className="base-pics-app">
+          {basePics &&
+            basePics.map((pic) => {
+              return (
+                <Pics
+                  name={pic.name}
+                  url={pic.url}
+                  setSelectedImg={setSelectedImg}
+                  selectedImg={selectedImg}
+                />
+              );
+            })}
+        </div>
+      </div>
+      <div className="list">
+        {listMeme.reduce((a, b, i) => {
+          const item = listMeme[listMeme.length - i - 1];
+          const picture = basePics.find((pic) => item.base_pics_id === pic.id);
+          a.push(
+            <Result
+              topSentence={item.txt1}
+              bottomSentence={item.txt2}
+              selectedImg={picture && picture.url}
+            />
+          );
+          return a;
+        }, [])}
+      </div>
     </div>
   );
 }

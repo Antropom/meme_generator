@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './component.css';
 const HEIGHT = 400;
 
 const Result = (props) => {
@@ -13,7 +14,6 @@ const Result = (props) => {
   }, [selectedImg]);
 
   useEffect(() => {
-    console.log(image, topSentence, bottomSentence);
     if (!image) return;
     const canvasObj = canvasRef.current;
     const ctx = canvasObj.getContext('2d');
@@ -22,18 +22,25 @@ const Result = (props) => {
     canvasObj.width = image.width / ratio;
     ctx.drawImage(image, 0, 0, canvasObj.width, HEIGHT);
     ctx.fillStyle = 'black';
+    ctx.font = `24pt impact`;
+    ctx.textAlign = 'center';
     const top = Math.floor(HEIGHT * 0.1);
-    const bottom = Math.floor(HEIGHT * 0.8);
-    ctx.font = `24pt impact`;
-    ctx.fillText(topSentence, 11, top + 1);
-    ctx.fillText(bottomSentence, 11, bottom + 1);
-    ctx.font = `24pt impact`;
+    const bottom = Math.floor(HEIGHT * 0.95);
+    ctx.fillText(topSentence, canvasObj.width / 2, top + 1, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom + 1, canvasObj.width);
+    ctx.fillText(topSentence, canvasObj.width / 2, top - 1, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom - 1, canvasObj.width);
+    ctx.fillText(topSentence, canvasObj.width / 2 + 1, top, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2 + 1, bottom, canvasObj.width);
+    ctx.fillText(topSentence, canvasObj.width / 2 - 1, top + 1, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2 - 1, bottom, canvasObj.width);
     ctx.fillStyle = 'white';
-    ctx.fillText(topSentence, 10, top);
-    ctx.fillText(bottomSentence, 10, bottom);
+    ctx.textAlign = 'center';
+    ctx.fillText(topSentence, canvasObj.width / 2, top, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom, canvasObj.width);
   }, [topSentence, bottomSentence, image]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas ref={canvasRef} className="canvas" />;
 };
 
 export default Result;

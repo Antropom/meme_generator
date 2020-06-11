@@ -1,16 +1,28 @@
 .block-component {
-    width: 20vw;
-    margin: 0 auto;
+  justify-content: center;
 }
-.small-title {
-    margin: 10px;
+.size {
+  height: 30vh;
+  width: 30vw;
+}
+.field :last-child {
+  align-self: center;
 }
 .flex {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+  justify-content: space-around;
 }
-.column {
-    flex-direction: column;
+.row {
+  flex-direction: row;
+  justify-content: space-around;
 }
-.input {
-    margin: 20px auto;
+
+.canvas {
+  margin: 10px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

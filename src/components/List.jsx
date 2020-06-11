@@ -4,7 +4,7 @@ import Result from './Result';
 const List = (props) => {
   const { listMeme, basePics } = props;
   return (
-    <div>
+    <div className="list">
       {listMeme.map((item) => {
         const picture = basePics.find((pic) => item.base_pics_id === pic.id);
         return (
