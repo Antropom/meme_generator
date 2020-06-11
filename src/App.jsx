@@ -35,7 +35,7 @@ function App() {
       .post(`${process.env.REACT_APP_API_URL}/api/memes`, body)
       .then((res) =>
         new Noty({
-          text: 'Post Effectué',
+          text: 'Meme ajouté, merci de ta contribution',
         }).show()
       )
       .then(() => {
@@ -46,6 +46,11 @@ function App() {
     setTopSentence('');
     setBottomSentence('');
   };
+  const missField = () => {
+    new Noty ({
+      text: 'Ajoute au moins une photo et une phrase de ton choix'
+    }).show()
+  }
 
   return (
     <div className="App">
@@ -73,6 +78,8 @@ function App() {
           bottomSentence={bottomSentence}
           setBottomSentence={setBottomSentence}
           handlesubmit={handlesubmit}
+          selectedImg={selectedImg}
+          missField={missField}
         />
         <div className="base-pics-app">
           {basePics &&
