@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
-import Sentence from "./components/Sentence";
-import "./App.css";
-import "noty/lib/noty.css";
-import "noty/lib/themes/metroui.css";
-import axios from "axios";
-import Noty from "noty";
-import Pics from "./components/Pics";
-import Result from "./components/Result";
-import List from "./components/List";
+import React, { useState, useEffect } from 'react';
+import Sentence from './components/Sentence';
+import './App.css';
+import 'noty/lib/noty.css';
+import 'noty/lib/themes/metroui.css';
+import axios from 'axios';
+import Noty from 'noty';
+import Pics from './components/Pics';
+import Result from './components/Result';
 
 function App() {
   const [basePics, setBasePics] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
-  const [topSentence, setTopSentence] = useState("");
-  const [bottomSentence, setBottomSentence] = useState("");
+  const [topSentence, setTopSentence] = useState('');
+  const [bottomSentence, setBottomSentence] = useState('');
   const [listMeme, setListMeme] = useState([]);
 
   useEffect(() => {
@@ -36,11 +35,11 @@ function App() {
       .post(`${process.env.REACT_APP_API_URL}/api/memes`, body)
       .then((res) =>
         new Noty({
-          type: "success",
-          theme: "metroui",
-          timeout: "1000",
+          type: 'success',
+          theme: 'metroui',
+          timeout: '1000',
           progressBar: false,
-          text: "Meme ajouté, merci de ta contribution",
+          text: 'Meme ajouté, merci de ta contribution',
         }).show()
       )
       .then(() => {
@@ -48,25 +47,25 @@ function App() {
           .get(`${process.env.REACT_APP_API_URL}/api/memes`)
           .then((res) => setListMeme(res.data));
       });
-    setTopSentence("");
-    setBottomSentence("");
+    setTopSentence('');
+    setBottomSentence('');
   };
   const missField = () => {
     new Noty({
-      type: "error",
-      theme: "metroui",
-      timeout: "1000",
+      type: 'error',
+      theme: 'metroui',
+      timeout: '1000',
       progressBar: false,
-      text: "Ajoute au moins une photo et une phrase de ton choix",
+      text: 'Ajoute au moins une photo et une phrase de ton choix',
     }).show();
   };
 
   return (
     <div className="App">
       <div className="header">
-        <h1 className="cursor-default">Geoffroy meme Generator</h1>
+        <h1 className="cursor-default">{`Geoffroy Meme Generator`}</h1>
         <p className="legend">
-          <em className="cursor-default">Pensez à ne pas baisser la barre</em>
+          <em className="cursor-default">{`Pensez à ne pas baisser la barre`}</em>
         </p>
       </div>
       <div className="interactive-panel">
@@ -78,7 +77,7 @@ function App() {
               selectedImg={selectedImg}
             />
           ) : (
-            <h3 className="cursor-default">1) Choisissez une image</h3>
+            <h3 className="cursor-default">{`1) Choisissez une image`}</h3>
           )}
         </div>
         <div className="flex-column-reverse">
