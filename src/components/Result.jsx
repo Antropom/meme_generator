@@ -26,18 +26,18 @@ const Result = (props) => {
     ctx.textAlign = 'center';
     const top = Math.floor(HEIGHT * 0.1);
     const bottom = Math.floor(HEIGHT * 0.95);
-    ctx.fillText(topSentence, canvasObj.width / 2, top + 1);
-    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom + 1);
-    ctx.fillText(topSentence, canvasObj.width / 2, top - 1);
-    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom - 1);
-    ctx.fillText(topSentence, canvasObj.width / 2 + 1, top);
-    ctx.fillText(bottomSentence, canvasObj.width / 2 + 1, bottom);
-    ctx.fillText(topSentence, canvasObj.width / 2 - 1, top + 1);
-    ctx.fillText(bottomSentence, canvasObj.width / 2 - 1, bottom);
+    ctx.fillText(topSentence, canvasObj.width / 2, top + 1, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom + 1, canvasObj.width);
+    ctx.fillText(topSentence, canvasObj.width / 2, top - 1, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom - 1, canvasObj.width);
+    ctx.fillText(topSentence, canvasObj.width / 2 + 1, top, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2 + 1, bottom, canvasObj.width);
+    ctx.fillText(topSentence, canvasObj.width / 2 - 1, top + 1, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2 - 1, bottom, canvasObj.width);
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
-    ctx.fillText(topSentence, canvasObj.width / 2, top);
-    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom);
+    ctx.fillText(topSentence, canvasObj.width / 2, top, canvasObj.width);
+    ctx.fillText(bottomSentence, canvasObj.width / 2, bottom, canvasObj.width);
   }, [topSentence, bottomSentence, image]);
 
   return <canvas ref={canvasRef} className="canvas" />;
