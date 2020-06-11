@@ -11,7 +11,7 @@ const Pics = (props) => {
     >
       <img
         className={classnames({
-          "selected-img": url === selectedImg,
+          "selected-img cursor-default": url === selectedImg,
         })}
         src={url}
         alt={name}

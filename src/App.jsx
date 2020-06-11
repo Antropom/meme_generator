@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Sentence from './components/Sentence';
 import './App.css';
 import 'noty/lib/noty.css';
-import 'noty/lib/themes/metroui.css'
+import 'noty/lib/themes/metroui.css';
 import axios from 'axios';
 import Noty from 'noty';
 import Pics from './components/Pics';
 import Result from './components/Result';
-import List from './components/List';
 
 function App() {
   const [basePics, setBasePics] = useState([]);
@@ -37,9 +36,9 @@ function App() {
       .then((res) =>
         new Noty({
           type: 'success',
-          theme: "metroui",
-          timeout: "1000",  
-          progressBar: false, 
+          theme: 'metroui',
+          timeout: '1000',
+          progressBar: false,
           text: 'Meme ajouté, merci de ta contribution',
         }).show()
       )
@@ -52,21 +51,21 @@ function App() {
     setBottomSentence('');
   };
   const missField = () => {
-    new Noty ({
+    new Noty({
       type: 'error',
-      theme: "metroui",
-      timeout: "1000",
+      theme: 'metroui',
+      timeout: '1000',
       progressBar: false,
       text: 'Ajoute au moins une photo et une phrase de ton choix',
-    }).show()
-  }
+    }).show();
+  };
 
   return (
     <div className="App">
       <div className="header">
-        <h1>Geoffroy meme Generator</h1>
+        <h1 className="cursor-default">{`Geoffroy Meme Generator`}</h1>
         <p className="legend">
-          <em>Pensez à ne pas baisser la barre</em>
+          <em className="cursor-default">{`Pensez à ne pas baisser la barre`}</em>
         </p>
       </div>
       <div className="interactive-panel">
@@ -78,30 +77,32 @@ function App() {
               selectedImg={selectedImg}
             />
           ) : (
-            <h3>1) Choisissez une image</h3>
+            <h3 className="cursor-default">{`1) Choisissez une image`}</h3>
           )}
         </div>
-        <Sentence
-          topSentence={topSentence}
-          setTopSentence={setTopSentence}
-          bottomSentence={bottomSentence}
-          setBottomSentence={setBottomSentence}
-          handlesubmit={handlesubmit}
-          selectedImg={selectedImg}
-          missField={missField}
-        />
-        <div className="base-pics-app">
-          {basePics &&
-            basePics.map((pic) => {
-              return (
-                <Pics
-                  name={pic.name}
-                  url={pic.url}
-                  setSelectedImg={setSelectedImg}
-                  selectedImg={selectedImg}
-                />
-              );
-            })}
+        <div className="flex-column-reverse">
+          <Sentence
+            topSentence={topSentence}
+            setTopSentence={setTopSentence}
+            bottomSentence={bottomSentence}
+            setBottomSentence={setBottomSentence}
+            handlesubmit={handlesubmit}
+            selectedImg={selectedImg}
+            missField={missField}
+          />
+          <div className="base-pics-app">
+            {basePics &&
+              basePics.map((pic) => {
+                return (
+                  <Pics
+                    name={pic.name}
+                    url={pic.url}
+                    setSelectedImg={setSelectedImg}
+                    selectedImg={selectedImg}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
       <div className="list">
