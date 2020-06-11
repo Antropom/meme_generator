@@ -14,6 +14,7 @@ function App() {
   const [topSentence, setTopSentence] = useState('');
   const [bottomSentence, setBottomSentence] = useState('');
   const [listMeme, setListMeme] = useState([]);
+  const [canvasDL, setCanvasDL] = useState(null);
 
   useEffect(() => {
     axios
@@ -23,6 +24,14 @@ function App() {
       .get(`${process.env.REACT_APP_API_URL}/api/memes`)
       .then((res) => setListMeme(res.data));
   }, []);
+
+  useEffect(() => {
+    if (canvasDL) {
+      console.log(canvasDL.current);
+      const test = canvasDL.current.toDataURL();
+      console.log(canvasDL);
+    }
+  }, [canvasDL]);
 
   const handlesubmit = () => {
     const picture = basePics.find((pic) => pic.url === selectedImg);
@@ -62,6 +71,7 @@ function App() {
               topSentence={topSentence}
               bottomSentence={bottomSentence}
               selectedImg={selectedImg}
+              setCanvasDL={setCanvasDL}
             />
           ) : (
             <h3>1) Choisissez une image</h3>

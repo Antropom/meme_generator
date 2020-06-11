@@ -5,7 +5,7 @@ const HEIGHT = 400;
 const Result = (props) => {
   const canvasRef = useRef(null);
   const [image, setImage] = useState(null);
-  const { topSentence, bottomSentence, selectedImg } = props;
+  const { topSentence, bottomSentence, selectedImg, setCanvasDL } = props;
 
   useEffect(() => {
     const img = new Image();
@@ -40,7 +40,13 @@ const Result = (props) => {
     ctx.fillText(bottomSentence, canvasObj.width / 2, bottom);
   }, [topSentence, bottomSentence, image]);
 
-  return <canvas ref={canvasRef} className="canvas" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="canvas"
+      onClick={(e) => setCanvasDL(canvasRef)}
+    />
+  );
 };
 
 export default Result;
