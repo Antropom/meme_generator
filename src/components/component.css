@@ -19,6 +19,12 @@
   justify-content: space-around;
 }
 
+.flex-column-reverse {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+}
+
 .canvas {
   margin: 10px;
 }

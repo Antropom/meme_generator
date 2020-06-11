@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import Sentence from './components/Sentence';
-import './App.css';
-import 'noty/lib/noty.css';
-import 'noty/lib/themes/metroui.css'
-import axios from 'axios';
-import Noty from 'noty';
-import Pics from './components/Pics';
-import Result from './components/Result';
-import List from './components/List';
+import React, { useState, useEffect } from "react";
+import Sentence from "./components/Sentence";
+import "./App.css";
+import "noty/lib/noty.css";
+import "noty/lib/themes/metroui.css";
+import axios from "axios";
+import Noty from "noty";
+import Pics from "./components/Pics";
+import Result from "./components/Result";
+import List from "./components/List";
 
 function App() {
   const [basePics, setBasePics] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
-  const [topSentence, setTopSentence] = useState('');
-  const [bottomSentence, setBottomSentence] = useState('');
+  const [topSentence, setTopSentence] = useState("");
+  const [bottomSentence, setBottomSentence] = useState("");
   const [listMeme, setListMeme] = useState([]);
 
   useEffect(() => {
@@ -36,11 +36,11 @@ function App() {
       .post(`${process.env.REACT_APP_API_URL}/api/memes`, body)
       .then((res) =>
         new Noty({
-          type: 'success',
+          type: "success",
           theme: "metroui",
-          timeout: "1000",  
-          progressBar: false, 
-          text: 'Meme ajouté, merci de ta contribution',
+          timeout: "1000",
+          progressBar: false,
+          text: "Meme ajouté, merci de ta contribution",
         }).show()
       )
       .then(() => {
@@ -48,18 +48,18 @@ function App() {
           .get(`${process.env.REACT_APP_API_URL}/api/memes`)
           .then((res) => setListMeme(res.data));
       });
-    setTopSentence('');
-    setBottomSentence('');
+    setTopSentence("");
+    setBottomSentence("");
   };
   const missField = () => {
-    new Noty ({
-      type: 'error',
+    new Noty({
+      type: "error",
       theme: "metroui",
       timeout: "1000",
       progressBar: false,
-      text: 'Ajoute au moins une photo et une phrase de ton choix',
-    }).show()
-  }
+      text: "Ajoute au moins une photo et une phrase de ton choix",
+    }).show();
+  };
 
   return (
     <div className="App">
@@ -81,27 +81,29 @@ function App() {
             <h3>1) Choisissez une image</h3>
           )}
         </div>
-        <Sentence
-          topSentence={topSentence}
-          setTopSentence={setTopSentence}
-          bottomSentence={bottomSentence}
-          setBottomSentence={setBottomSentence}
-          handlesubmit={handlesubmit}
-          selectedImg={selectedImg}
-          missField={missField}
-        />
-        <div className="base-pics-app">
-          {basePics &&
-            basePics.map((pic) => {
-              return (
-                <Pics
-                  name={pic.name}
-                  url={pic.url}
-                  setSelectedImg={setSelectedImg}
-                  selectedImg={selectedImg}
-                />
-              );
-            })}
+        <div className="flex-column-reverse">
+          <Sentence
+            topSentence={topSentence}
+            setTopSentence={setTopSentence}
+            bottomSentence={bottomSentence}
+            setBottomSentence={setBottomSentence}
+            handlesubmit={handlesubmit}
+            selectedImg={selectedImg}
+            missField={missField}
+          />
+          <div className="base-pics-app">
+            {basePics &&
+              basePics.map((pic) => {
+                return (
+                  <Pics
+                    name={pic.name}
+                    url={pic.url}
+                    setSelectedImg={setSelectedImg}
+                    selectedImg={selectedImg}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
       <div className="list">
