@@ -1,10 +1,6 @@
 .block-component {
   justify-content: center;
 }
-.size {
-  height: 30vh;
-  width: 30vw;
-}
 .field :last-child {
   align-self: center;
 }

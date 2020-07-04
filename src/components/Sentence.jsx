@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import './component.css';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,43 +17,38 @@ function Sentence({
   bottomSentence,
   setBottomSentence,
   handlesubmit,
-  selectedtImg,
+  selectedImg,
   missField,
 }) {
   const classes = useStyles();
   return (
-    <div className="flex size field">
+    <>
       <h4 className="cursor-default">{`2) Merci de faire des memes drôles`}</h4>
-      <label className="small-title" htmlFor="">
-        {`Phrase du haut`}
-      </label>
-      <input
-        className="input"
+      <TextField
+        id="standard-basic"
+        label="Phrase du haut"
         type="text"
         name=""
-        id=""
         value={topSentence}
         onChange={(e) => setTopSentence(e.target.value.toUpperCase())}
       />
-      <label className="small-title" htmlFor="">
-        {`Phrase du bas`}
-      </label>
-      <input
+      <TextField
+        id="standard-basic"
+        label="Phrase du haut"
         className="input"
         type="text"
         name=""
-        id=""
         value={bottomSentence}
         onChange={(e) => setBottomSentence(e.target.value.toUpperCase())}
       />
-      <div className={`flex row ${classes.root}`}>
+      <div className={classes.root}>
         <Button
           variant="contained"
           disableElevation
           color="primary"
           className="cursor-pointer"
           onClick={() => {
-            if (selectedtImg !== '') {
+            if (selectedImg !== null) {
               if (topSentence !== '' || bottomSentence !== '') {
                 return handlesubmit();
               }
@@ -65,8 +60,7 @@ function Sentence({
         </Button>
         {/* <button className="cursor-pointer">Télécharger</button> */}
       </div>
-      <h4 className="cursor-default">{`3) Partagez-le massivement`}</h4>
-    </div>
+    </>
   );
 }
 

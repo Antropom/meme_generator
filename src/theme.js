@@ -1,5 +1,4 @@
-import { red } from '@material-ui/core/colors';
-import { teal } from '@material-ui/core/colors';
+import { red, teal, deepOrange } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -8,10 +7,10 @@ const theme = createMuiTheme({
       main: teal[500],
     },
     secondary: {
-      main: '#19857b',
+      main: red.A400,
     },
     error: {
-      main: red.A400,
+      main: deepOrange.A400,
     },
     background: {
       default: '#fff',
