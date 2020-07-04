@@ -1,5 +1,15 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import './component.css';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 function Sentence({
   topSentence,
@@ -10,6 +20,7 @@ function Sentence({
   selectedtImg,
   missField,
 }) {
+  const classes = useStyles();
   return (
     <div className="flex size field">
       <h4 className="cursor-default">{`2) Merci de faire des memes drôles`}</h4>
@@ -35,8 +46,11 @@ function Sentence({
         value={bottomSentence}
         onChange={(e) => setBottomSentence(e.target.value.toUpperCase())}
       />
-      <div className="flex row">
-        <button
+      <div className={`flex row ${classes.root}`}>
+        <Button
+          variant="contained"
+          disableElevation
+          color="primary"
           className="cursor-pointer"
           onClick={() => {
             if (selectedtImg !== '') {
@@ -48,7 +62,7 @@ function Sentence({
           }}
         >
           {`Envoyer`}
-        </button>
+        </Button>
         {/* <button className="cursor-pointer">Télécharger</button> */}
       </div>
       <h4 className="cursor-default">{`3) Partagez-le massivement`}</h4>
