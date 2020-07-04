@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import Sentence from './components/Sentence';
-import 'noty/lib/noty.css';
-import 'noty/lib/themes/metroui.css';
 import axios from 'axios';
-import Noty from 'noty';
 import PicsList from './components/PicsList';
 import Result from './components/Result';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
   },
   picsList: {
-    maxHeight: '32vh',
+    maxHeight: '33vh',
     overflowY: 'scroll',
   },
   paper: {
@@ -43,6 +46,8 @@ function App() {
   const [topSentence, setTopSentence] = useState('');
   const [bottomSentence, setBottomSentence] = useState('');
   const [listMeme, setListMeme] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [openError, setOpenError] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -63,15 +68,7 @@ function App() {
     };
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/memes`, body)
-      .then((res) =>
-        new Noty({
-          type: 'success',
-          theme: 'metroui',
-          timeout: '1000',
-          progressBar: false,
-          text: 'Meme ajouté, merci de ta contribution',
-        }).show()
-      )
+      .then((res) => setOpen(true))
       .then(() => {
         axios
           .get(`${process.env.REACT_APP_API_URL}/api/memes`)
@@ -81,13 +78,16 @@ function App() {
     setBottomSentence('');
   };
   const missField = () => {
-    new Noty({
-      type: 'error',
-      theme: 'metroui',
-      timeout: '1000',
-      progressBar: false,
-      text: 'Ajoute au moins une photo et une phrase de ton choix',
-    }).show();
+    setOpenError(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+    setOpenError(false);
   };
 
   return (
@@ -103,7 +103,7 @@ function App() {
         </Grid>
       </Grid>
       <Paper className={classes.paper}>
-        <Grid container>
+        <Grid container spacing={2}>
           <Grid
             container
             justify="center"
@@ -183,6 +183,32 @@ function App() {
           return a;
         }, [])}
       </Grid>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="success">
+          Meme posté avec succès !
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={openError}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error">
+          Sélectionne au moins une photo et une phrase.
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 }
