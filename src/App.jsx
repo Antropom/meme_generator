@@ -16,13 +16,24 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '90vw',
     margin: '0 auto',
   },
+  title: {
+    marginBottom: '2px',
+  },
+  subTitle: {
+    marginTop: 0,
+    textAlign: 'right',
+  },
   picsList: {
-    maxHeight: '30vh',
+    maxHeight: '32vh',
     overflowY: 'scroll',
   },
   paper: {
     width: '90vw',
     padding: 2 * theme.spacing(),
+    marginBottom: '25px',
+  },
+  sentence: {
+    width: '100%',
   },
 }));
 
@@ -83,10 +94,12 @@ function App() {
     <Grid container className={classes.root} spacing={2}>
       <Grid item xs={12}>
         <Grid container direction="column" justify="center" alignItems="center">
-          <h1 className="cursor-default">{`Geoffroy Meme Generator`}</h1>
-          <p className="legend">
-            <em className="cursor-default">{`Pensez à ne pas baisser la barre`}</em>
-          </p>
+          <Grid item xs={12}>
+            <h1 className={classes.title}>{`Geoffroy Meme Generator`}</h1>
+            <p className={classes.subTitle}>
+              <em>{`Pensez à ne pas baisser la barre`}</em>
+            </p>
+          </Grid>
         </Grid>
       </Grid>
       <Paper className={classes.paper}>
@@ -115,8 +128,9 @@ function App() {
               direction="column-reverse"
               justify="center"
               alignItems="center"
+              spacing={2}
             >
-              <Grid item xs={12} md={12}>
+              <Grid item xs={12} className={classes.sentence}>
                 <Sentence
                   topSentence={topSentence}
                   setTopSentence={setTopSentence}
@@ -127,7 +141,13 @@ function App() {
                   missField={missField}
                 />
               </Grid>
-              <Grid item container className={classes.picsList} xs={12}>
+              <Grid
+                item
+                container
+                className={classes.picsList}
+                xs={12}
+                spacing={1}
+              >
                 <PicsList
                   basePics={basePics}
                   setSelectedImg={setSelectedImg}
@@ -138,7 +158,7 @@ function App() {
           </Grid>
         </Grid>
       </Paper>
-      <Grid container>
+      <Grid container spacing={2}>
         {listMeme.reduce((a, b, i) => {
           const item = listMeme[listMeme.length - i - 1];
           const picture = basePics.find((pic) => item.base_pics_id === pic.id);

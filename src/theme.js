@@ -13,7 +13,7 @@ const theme = createMuiTheme({
       main: deepOrange.A400,
     },
     background: {
-      default: '#fff',
+      default: '#EEE',
     },
   },
 });
