@@ -1,5 +1,24 @@
 import React from 'react';
-import './component.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '80%',
+    margin: '0 auto',
+  },
+  centered: {
+    textAlign: 'center',
+    width: '100%',
+  },
+  button: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 function Sentence({
   topSentence,
@@ -7,52 +26,63 @@ function Sentence({
   bottomSentence,
   setBottomSentence,
   handlesubmit,
-  selectedtImg,
+  selectedImg,
   missField,
 }) {
+  const classes = useStyles();
   return (
-    <div className="flex size field">
-      <h4 className="cursor-default">{`2) Merci de faire des memes drôles`}</h4>
-      <label className="small-title" htmlFor="">
-        {`Phrase du haut`}
-      </label>
-      <input
-        className="input"
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+      className={classes.root}
+      spacing={4}
+    >
+      <Grid item xs={12} className={classes.root}>
+        <h4
+          className={classes.centered}
+        >{`2) Merci de faire des memes drôles`}</h4>
+      </Grid>
+      <TextField
+        className={classes.centered}
+        id="standard-basic"
+        label="Phrase du haut"
         type="text"
         name=""
-        id=""
         value={topSentence}
         onChange={(e) => setTopSentence(e.target.value.toUpperCase())}
       />
-      <label className="small-title" htmlFor="">
-        {`Phrase du bas`}
-      </label>
-      <input
-        className="input"
+      <TextField
+        className={classes.centered}
+        id="standard-basic"
+        label="Phrase du haut"
         type="text"
         name=""
-        id=""
         value={bottomSentence}
         onChange={(e) => setBottomSentence(e.target.value.toUpperCase())}
       />
-      <div className="flex row">
-        <button
-          className="cursor-pointer"
-          onClick={() => {
-            if (selectedtImg !== '') {
-              if (topSentence !== '' || bottomSentence !== '') {
-                return handlesubmit();
+      <Grid item xs={12} className={classes.root}>
+        <div className={(classes.button, classes.centered)}>
+          <Button
+            variant="contained"
+            disableElevation
+            color="primary"
+            onClick={() => {
+              if (selectedImg !== null) {
+                if (topSentence !== '' || bottomSentence !== '') {
+                  return handlesubmit();
+                }
               }
-            }
-            return missField();
-          }}
-        >
-          {`Envoyer`}
-        </button>
-        {/* <button className="cursor-pointer">Télécharger</button> */}
-      </div>
-      <h4 className="cursor-default">{`3) Partagez-le massivement`}</h4>
-    </div>
+              return missField();
+            }}
+          >
+            {`Envoyer`}
+          </Button>
+          {/* <button className="cursor-pointer">Télécharger</button> */}
+        </div>
+      </Grid>
+    </Grid>
   );
 }
 
